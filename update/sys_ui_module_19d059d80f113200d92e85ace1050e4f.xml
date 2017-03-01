@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_ui_module">
+    <sys_ui_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="Allocation Month">5dd059d80f113200d92e85ace1050e4c</application>
+        <filter/>
+        <name>Allocation Months</name>
+        <order/>
+        <path/>
+        <path_relative_to_root>false</path_relative_to_root>
+        <roles>x_44552_bdt.allocation_month_user</roles>
+        <sys_class_name>sys_ui_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-02-28 09:52:50</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>19d059d80f113200d92e85ace1050e4f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Allocation Months</sys_name>
+        <sys_package display_value="Business Demand Tool" source="x_44552_bdt">a85b28f40f497200d92e85ace1050ed0</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Business Demand Tool">a85b28f40f497200d92e85ace1050ed0</sys_scope>
+        <sys_update_name>sys_ui_module_19d059d80f113200d92e85ace1050e4f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-02-28 09:52:50</sys_updated_on>
+        <table>x_44552_bdt_allocation_month</table>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+    </sys_ui_module>
+</record_update>

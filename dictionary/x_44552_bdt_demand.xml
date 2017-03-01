@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element extends="task" label="Demand" max_length="40" name="x_44552_bdt_demand" sizeclass="3" type="collection">
+        <element label="Allocated (Hrs)" max_length="40" name="allocated" type="integer"/>
+        <element label="Expected Duration (Hrs)" max_length="40" name="expected_duration" type="integer"/>
+        <element label="Left (Hrs)" max_length="40" name="left" type="integer"/>
+    </element>
+</database>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="x_44552_bdt_resource_report" version="2" view="rpt-tempx_44552_bdt_resource_reportadmin">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>resource</element>
+            <list_id display_value="x_44552_bdt_resource_report" element="NULL" name="x_44552_bdt_resource_report" parent="NULL" relationship="NULL" sys_domain="global" view="c58fc0f10f817200d92e85ace1050e6b">c18fc0f10f817200d92e85ace1050e6c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-20 10:42:38</sys_created_on>
+            <sys_id>098fc0f10f817200d92e85ace1050e6c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-20 10:42:38</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>task</element>
+            <list_id display_value="x_44552_bdt_resource_report" element="NULL" name="x_44552_bdt_resource_report" parent="NULL" relationship="NULL" sys_domain="global" view="c58fc0f10f817200d92e85ace1050e6b">c18fc0f10f817200d92e85ace1050e6c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-20 10:42:38</sys_created_on>
+            <sys_id>898fc0f10f817200d92e85ace1050e6c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-20 10:42:38</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>type</element>
+            <list_id display_value="x_44552_bdt_resource_report" element="NULL" name="x_44552_bdt_resource_report" parent="NULL" relationship="NULL" sys_domain="global" view="c58fc0f10f817200d92e85ace1050e6b">c18fc0f10f817200d92e85ace1050e6c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-20 10:42:38</sys_created_on>
+            <sys_id>0d8fc0f10f817200d92e85ace1050e6c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-20 10:42:38</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>hours</element>
+            <list_id display_value="x_44552_bdt_resource_report" element="NULL" name="x_44552_bdt_resource_report" parent="NULL" relationship="NULL" sys_domain="global" view="c58fc0f10f817200d92e85ace1050e6b">c18fc0f10f817200d92e85ace1050e6c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-20 10:42:38</sys_created_on>
+            <sys_id>8d8fc0f10f817200d92e85ace1050e6c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-20 10:42:38</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>x_44552_bdt_resource_report</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-20 10:42:38</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c18fc0f10f817200d92e85ace1050e6c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name/>
+            <sys_package/>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Business Demand Tool">a85b28f40f497200d92e85ace1050ed0</sys_scope>
+            <sys_update_name/>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-20 10:42:38</sys_updated_on>
+            <sys_user/>
+            <view display_value="Rpt-tempx_44552_bdt_resource_reportadmin" name="rpt-tempx_44552_bdt_resource_reportadmin">c58fc0f10f817200d92e85ace1050e6b</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

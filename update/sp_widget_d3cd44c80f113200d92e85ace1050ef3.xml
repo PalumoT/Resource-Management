@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope, $uibModal) {
+  var c = this;
+	var allocations = $scope.data.allocations;
+	var resources = $scope.data.resources;
+	
+	$scope.allocations = [];
+	$scope.resources = [];
+	$scope.filter = {"month": null}; // Filter for allocation table
+	$scope.timerange = 6; // Number of month to display;
+	$scope.index = 0;
+	$scope.chartType = "bar";
+	$scope.slide = function(direction){
+		if(direction === 'left'){
+			$scope.index --;
+		}
+		
+		if(direction === 'right'){
+			$scope.index ++;
+		}
+		
+		loadChart(resources);
+	}
+	
+	$scope.toggleChart = function(){
+		$scope.chartType = $scope.chartType == "bar" ? "line" : "bar";
+	}
+	
+	$scope.filterField = function(){
+		return function (item) {
+			var filter = $scope.filter;
+			
+			if(!filter.month){
+				return true;
+			}
+			
+			var month = item.month;
+			var period = getMonthName(month.getMonth()) + " " + month.getFullYear()
+			
+      return period == filter.month;
+    }
+	}
+	
+	function loadChart(resources){
+		var configuration = {
+			"labels": [],
+			"type": "bar",
+			"series": ['Capacity', 'Allocated'],
+			"data": [[], []],
+			"colors": ['#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+			"legend": {
+					"display": true,
+					"labels": {
+						"fontColor": 'rgb(255, 99, 132)'
+					}
+			},
+			"onClick": function (points, evt) {
+				if(points.length < 1){
+					return ;
+				}
+				
+				var point = points[0];
+				if($scope.filter.month == null){
+					$scope.filter.month = point.label;	
+				}else{
+					$scope.filter.month = null;
+				}
+			}
+		}
+	
+		var labels = [];
+		var data = [[],[]];
+		var users = [];
+		var allocations = [];
+		
+		for(var i=0; i<$scope.timerange; i++){
+			var startFrom = new Date();
+			startFrom.setMonth(startFrom.getMonth() + i + $scope.index);
+
+			var allocation = getAllocation(
+				$scope.data.allocations,
+				startFrom.getFullYear(),
+				startFrom.getMonth());
+			
+			var capacity = getCapacity(
+				allocation.resourceAllocations,
+				resources,
+				startFrom.getFullYear(),
+				startFrom.getMonth()
+			);			
+			
+			data[0].push(capacity.capacity);
+			data[1].push(allocation.allocated);
+			labels.push(getMonthName(startFrom.getMonth()) + " " + startFrom.getFullYear());
+			
+			users.push.apply(users, capacity.resources);
+			allocations.push.apply(allocations, allocation.resourceAllocations);
+		}
+
+		configuration.labels = labels;
+		configuration.data = data;
+
+		configuration.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+		
+		$scope.configuration = configuration;
+		$scope.resources = users;
+		$scope.allocations = allocations;
+	}
+	
+	function getMonthName(month){
+		var names = ["January", "February", "March", "April", "May", "June", 
+								 "July", "August", "September","October","November", "December"];
+		
+		return names[month-1];
+	}
+	
+	function getAllocation(data, year, month){
+		var allocations = [];
+		var allocated = 0;
+		
+		for(var i=0; i<data.length; i++){
+			var allocation = data[i];
+			var period = allocation.period;
+			
+			if(period.month == month && period.year == year){
+				allocations.push({
+					"resource": allocation.resource,
+					"task": allocation.task,
+					"allocated": allocation.allocated,
+					"month": new Date(year, month, 1)
+				})
+				
+				allocated += parseFloat(allocation.allocated);
+			}
+		}
+		
+		return {"allocated": allocated, "resourceAllocations": allocations};
+	}
+	
+	function getCapacity(allocations, resources, year, month){
+		var totalWorkingDays = 21;
+		var capacity = 0;
+		var users = [];
+		
+		for(var i=0; i<resources.length; i++){
+			var resource = {
+				"user": resources[i],
+				"capacity": 21,
+				"month": new Date(year,month,1),
+				"allocated":0
+			};
+			
+			var user = resource.user;
+			
+			for(var j=0; j< user.holidays.length; j++){
+				var holiday = user.holidays[j];
+				
+				if(holiday.month == month && holiday.year == year){
+					resource.capacity -= parseFloat(holiday.percentage);
+				}
+			}
+			
+			for(var k=0;k<allocations.length; k++){
+				var allocation = allocations[k];
+				
+				if(allocation.resource == user.username){
+					resource.allocated += parseFloat(allocation.allocated);
+				}
+			}
+
+			resource.capacity = resource.capacity * user.fte;
+			capacity += resource.capacity;
+
+			users.push(resource)
+		}
+		
+		return {"capacity": capacity, "resources": users};
+	}
+	
+	loadChart(resources);
+	
+	c.openModal = function(allocations) {
+		c.allocations = allocations;
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'modalTemplate',
+			scope: $scope
+		});
+	}
+ 
+	c.closeModal = function() {
+		c.modalInstance.close();
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>resource_dashboard</id>
+        <internal>false</internal>
+        <link/>
+        <name>Resource Dashboard</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	data.allocations = [];
+	data.resources = [];
+
+	var resourceRecord = new GlideRecord("x_44552_bdt_resource");
+	resourceRecord.query();
+	
+	while(resourceRecord.next()){
+		var resource = {
+			"sys_id": resourceRecord.sys_id.toString(),
+			"class": "x_44552_bdt_resource",
+			"username": resourceRecord.getDisplayValue("user"),
+			"fte": resourceRecord.fte.toString(),
+			"holidays": [],
+			"allocations": []
+		}
+		
+		var holidays = new GlideRecord("x_44552_bdt_resource_time_off");
+		holidays.addQuery("resource", resourceRecord.sys_id);
+		holidays.query();
+		
+		while(holidays.next()){
+			var day = new GlideDateTime(holidays.day);
+			resource.holidays.push({"percentage": holidays.percentage.toString(),
+															"month": day.getMonthUTC(),
+															"year": day.getYearUTC()
+														 });
+		}
+		
+		var allocationRecord = new GlideRecord("x_44552_bdt_allocation");
+		allocationRecord.addQuery("resource", resourceRecord.sys_id);
+		allocationRecord.query();
+		
+		while(allocationRecord.next()){
+			var allocation = {
+				"task": allocationRecord.task.getDisplayValue(),
+				"totalAllocated": allocationRecord.total_allocated.toString(),
+				"from": allocationRecord.from.toString(),
+				"until": allocationRecord.to.toString()
+			};
+			
+			resource.allocations.push(allocation);
+		}
+		
+		data.resources.push(resource);
+	}
+
+	var record = new GlideRecord("x_44552_bdt_resource_allocation_split");
+	record.query();
+
+	while(record.next()){
+		var month = record.month;
+		var resourceAllocation = record.resource_allocation;
+		var glideDate = new GlideDateTime(month.from);
+		
+		data.allocations.push({
+			"resource": resourceAllocation.resource.getDisplayValue(),
+			"task": resourceAllocation.task.getDisplayValue(),
+			"allocated": record.allocated.toString(),
+			"period": {
+				"name": month.name.toString(),
+				"date": month.from.toString(),
+				"month": glideDate.getMonthUTC(),
+				"year": glideDate.getYearUTC()
+			}
+		});
+	}
+	
+	function getMonthObject(date){
+		var month = new GlideDateTime(date).getMonthUTC();
+		var names = ["January", "February", "March", "April", "May", "June", "July"];
+		
+		return {
+			"name": names[month],
+			"index": month
+		};
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-02-27 10:21:28</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>d3cd44c80f113200d92e85ace1050ef3</sys_id>
+        <sys_mod_count>384</sys_mod_count>
+        <sys_name>Resource Dashboard</sys_name>
+        <sys_package display_value="Business Demand Tool" source="x_44552_bdt">a85b28f40f497200d92e85ace1050ed0</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Business Demand Tool">a85b28f40f497200d92e85ace1050ed0</sys_scope>
+        <sys_update_name>sp_widget_d3cd44c80f113200d92e85ace1050ef3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-02-28 16:28:31</sys_updated_on>
+        <template><![CDATA[<div style="margin-bottom:150px;">
+  <h3>Resource Management
+    <div class="text-right">
+      <a href="sp?id=form&table=x_44552_bdt_demand&sys_id=-1" class="btn btn-primary" hr>New Demand</a>
+      <button class="btn btn-primary" ng-click="toggleChart()">Toggle</button>
+      <button class="btn btn-primary" ng-click="slide('left')"><span class="glyphicon glyphicon-chevron-left"></span></button>
+      <button class="btn btn-primary" ng-click="slide('right')"><span class="glyphicon glyphicon-chevron-right"></span></button>
+    </div>
+  </h3>
+  
+  <div ng-show="chartType == 'bar'">
+    <canvas class="chart chart-bar"
+            chart-data="configuration.data"
+            chart-labels="configuration.labels" 
+            chart-series="configuration.series" 
+            chart-legend="configuration.legend"
+            chart-tooltip="configuration.tooltip"
+            chart-dataset-override="configuration.datasetOverride" 
+            chart-click="configuration.onClick"
+            chart-colours="configuration.colors">
+    </canvas>
+  </div>
+  
+  <div ng-show="chartType == 'line'">
+    <canvas class="chart chart-line"
+            chart-data="configuration.data"
+            chart-labels="configuration.labels" 
+            chart-series="configuration.series" 
+            chart-legend="configuration.legend"
+            chart-dataset-override="configuration.datasetOverride" 
+            chart-click="configuration.onClick"
+            chart-colours="configuration.colors">
+    </canvas>
+  </div>
+  
+  <div>
+    <h3>Resource Allocation</h3>
+    <span>Fitler on : {{ filter.month }}</span>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Resource</th>
+          <th>Allocated</th>
+          <th>Month</th>
+        <tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="allocation in allocations | filter:filterField() | orderBy :'task'">
+          <td>{{ allocation.task }}</td>
+          <td>{{ allocation.resource }}</td>
+          <td>{{ allocation.allocated }}</td>
+          <td>{{ allocation.month | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>Resource Capacity</h3>
+    <span>Fitler on : {{ filter.month }}</span>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>Capacity</th>
+          <th>Allocated</th>
+          <th>Month</th>
+        <tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="resource in resources | filter:filterField()">
+          <td>{{ resource.user.username }}</td>
+          <td>{{ resource.capacity }}</td>
+          <td>{{ resource.allocated }}</td>
+          <td>{{ resource.month | date:'MMMM yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script type="text/ng-template" id="modalTemplate">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Allocations</h4>
+  		</div>
+     	<div class="panel-body wrapper-xl">
+         <table class="table">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Total Allocated</th>
+          <th>From</th>
+          <th>Until</th>
+        <tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="allocation in c.allocations">
+          <td>{{ allocation.task }}</td>
+          <td>{{ allocation.totalAllocated }}</td>
+          <td>{{ allocation.from | date }}</td>
+          <td>{{ allocation.until | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  		</div>
+      <div class="panel-footer text-right">
+        <button class="btn btn-primary" ng-click="c.closeModal()">${Close}</button>
+  	</div>
+  </div>
+</script>]]></template>
+    </sp_widget>
+</record_update>

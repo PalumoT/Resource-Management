@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Resource Report" max_length="40" name="x_44552_bdt_resource_report" type="collection">
+        <element label="Hours" max_length="40" name="hours" type="integer"/>
+        <element label="Month" max_length="40" name="month" type="glide_date"/>
+        <element label="Resource" max_length="32" name="resource" reference="x_44552_bdt_resource" type="reference"/>
+        <element label="Task" max_length="32" name="task" reference="task" type="reference"/>
+        <element choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element label="Capacity" sequence="1" value="capacity"/>
+                <element label="Allocated" sequence="2" value="allocated"/>
+                <element label="Available" sequence="3" value="available"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="task"/>
+        </index>
+        <index name="index2">
+            <element name="resource"/>
+        </index>
+    </element>
+</database>

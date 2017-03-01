@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="type" table="x_44552_bdt_resource_report" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Capacity</label>
+            <language>en</language>
+            <name>x_44552_bdt_resource_report</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-20 10:35:40</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bbdd88b10f817200d92e85ace1050e8b</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-20 10:36:35</sys_updated_on>
+            <value>capacity</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Allocated</label>
+            <language>en</language>
+            <name>x_44552_bdt_resource_report</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-20 10:36:13</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>83ed04b10f817200d92e85ace1050e8e</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-20 10:36:38</sys_updated_on>
+            <value>allocated</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Available</label>
+            <language>en</language>
+            <name>x_44552_bdt_resource_report</name>
+            <sequence>3</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-20 10:36:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>070ec0b10f817200d92e85ace1050e10</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-20 10:36:41</sys_updated_on>
+            <value>available</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>type</element>
+            <name>x_44552_bdt_resource_report</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-20 10:35:40</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>87ed88b10f817200d92e85ace1050e3d</sys_id>
+            <sys_mod_count>9</sys_mod_count>
+            <sys_name>type</sys_name>
+            <sys_package display_value="Business Demand Tool" source="x_44552_bdt">a85b28f40f497200d92e85ace1050ed0</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Business Demand Tool">a85b28f40f497200d92e85ace1050ed0</sys_scope>
+            <sys_update_name>sys_choice_x_44552_bdt_resource_report_type</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-20 10:36:41</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

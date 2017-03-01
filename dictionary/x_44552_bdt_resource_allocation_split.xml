@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Resource Allocation Split" max_length="40" name="x_44552_bdt_resource_allocation_split" type="collection">
+        <element label="Allocated" max_length="40" name="allocated" type="integer"/>
+        <element label="Month" max_length="32" name="month" reference="x_44552_bdt_allocation_month" type="reference"/>
+        <element label="Percentage" max_length="20" name="percentage" type="decimal"/>
+        <element label="Resource Allocation" max_length="32" name="resource_allocation" reference="x_44552_bdt_allocation" type="reference"/>
+        <index name="index">
+            <element name="month"/>
+        </index>
+        <index name="index2">
+            <element name="resource_allocation"/>
+        </index>
+    </element>
+</database>

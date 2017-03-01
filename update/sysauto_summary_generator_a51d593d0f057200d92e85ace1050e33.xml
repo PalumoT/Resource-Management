@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sysauto_summary_generator">
+    <sysauto_summary_generator action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition/>
+        <conditional>false</conditional>
+        <name>Generate Resource Data</name>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2017-02-20 16:21:33</run_start>
+        <run_time>1970-01-01 08:15:00</run_time>
+        <run_type>daily</run_type>
+        <script><![CDATA[// Setup the Start/End Date ranges
+var sumID = createSummary();
+var counter = 0;
+
+var resource = new GlideRecord('x_44552_bdt_resource');
+resource.orderBy("booked_from");
+resource.query();
+
+while (resource.next()) {
+	createSummaryLine(sumID, counter, resource.booked_from.toString(), resource.allocated, resource.allocated / resource.capacity, "#FFA100", 0);
+	counter ++;
+}
+
+var oldSummary = current.getValue('summary');
+current.summary = sumID;
+current.setWorkflow(false);
+current.update();
+updatePreviousSummaryToExpireNow(oldSummary);
+
+function createSummary(title) {
+	var s = new GlideRecord("sys_report_summary");
+	s.title = "Total License Count";
+	s.field = "Week Starting";
+	s.expires = new GlideDateTime();
+	return s.insert();
+}
+
+function createSummaryLine(id, seq, name, num, percent, color, level) {
+	var s = new GlideRecord("sys_report_summary_line");
+	s.summary = id;
+	s.sequence = seq;
+	s.value = num;
+	s.name = name;
+	s.color = color;
+	s.level = level;
+	s.percent = percent;
+	s.insert();
+}
+
+function updatePreviousSummaryToExpireNow(summaryID) {
+	if (summaryID == null)
+		return;
+	
+	var previous = new GlideRecord("sys_report_summary");
+	previous.get(summaryID);
+	if (previous.isValidRecord()) {
+		previous.expires = new GlideDateTime();
+		previous.update();
+	}
+}]]></script>
+        <summary display_value="Total License Count">d85a066c0f593200d92e85ace1050ea7</summary>
+        <sys_class_name>sysauto_summary_generator</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-02-20 16:21:50</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>a51d593d0f057200d92e85ace1050e33</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>Generate Resource Data</sys_name>
+        <sys_package display_value="Business Demand Tool" source="x_44552_bdt">a85b28f40f497200d92e85ace1050ed0</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Business Demand Tool">a85b28f40f497200d92e85ace1050ed0</sys_scope>
+        <sys_update_name>sysauto_summary_generator_a51d593d0f057200d92e85ace1050e33</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-03-01 08:42:27</sys_updated_on>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_summary_generator>
+</record_update>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="percentage" table="x_44552_bdt_resource_time_off" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>percentage</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Half Day</label>
+            <language>en</language>
+            <name>x_44552_bdt_resource_time_off</name>
+            <sequence/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-27 13:19:37</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3e8670800f913200d92e85ace1050ec4</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-27 13:20:42</sys_updated_on>
+            <value>0.5</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>percentage</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>All Day</label>
+            <language>en</language>
+            <name>x_44552_bdt_resource_time_off</name>
+            <sequence/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-27 13:19:27</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d48630400f913200d92e85ace1050e86</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-27 13:20:22</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>percentage</element>
+            <name>x_44552_bdt_resource_time_off</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-27 13:19:27</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>ae86bc400f913200d92e85ace1050e60</sys_id>
+            <sys_mod_count>8</sys_mod_count>
+            <sys_name>percentage</sys_name>
+            <sys_package display_value="Business Demand Tool" source="x_44552_bdt">a85b28f40f497200d92e85ace1050ed0</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Business Demand Tool">a85b28f40f497200d92e85ace1050ed0</sys_scope>
+            <sys_update_name>sys_choice_x_44552_bdt_resource_time_off_percentage</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-27 13:20:42</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

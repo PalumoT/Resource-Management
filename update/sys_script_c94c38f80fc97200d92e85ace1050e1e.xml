@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_44552_bdt_allocation</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Calculate Resource Allocation</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	var resource = current.resource.getRefRecord();
+	var from = new GlideDateTime(current.getValue("from")).getDate();
+	var to = new GlideDateTime(current.getValue("to")).getDate();
+	var total = 0;
+	
+	if(current.from &&
+	   (resource.booked_from == "" || resource.booked_from > from))
+	{
+		resource.booked_from = from;
+	}
+	
+	if(current.to &&
+	   (resource.booked_until == "" || resource.booked_until < to))
+	{
+		resource.booked_until = to;
+	}
+	
+	var allocatedHours = new GlideAggregate("x_44552_bdt_allocation");
+	allocatedHours.addAggregate("SUM", "total_allocated");
+	allocatedHours.addQuery("resource", resource.sys_id);
+	allocatedHours.query();
+	
+	while(allocatedHours.next()){
+		total += parseInt(allocatedHours.getAggregate("SUM", "total_allocated"));
+	}
+	
+	resource.allocated = total;
+	resource.left = parseInt(resource.capacity) - parseInt(resource.allocated);
+	
+	if(parseInt(resource.left) < 0){
+		gs.addErrorMessage("Resource is overused (" + resource.left + " hours)");
+	}
+	resource.update();
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-02-17 11:27:09</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c94c38f80fc97200d92e85ace1050e1e</sys_id>
+        <sys_mod_count>44</sys_mod_count>
+        <sys_name>Calculate Resource Allocation</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Business Demand Tool" source="x_44552_bdt">a85b28f40f497200d92e85ace1050ed0</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Business Demand Tool">a85b28f40f497200d92e85ace1050ed0</sys_scope>
+        <sys_update_name>sys_script_c94c38f80fc97200d92e85ace1050e1e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-02-17 15:03:58</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=c94c38f80fc97200d92e85ace1050e1e"/>
+</record_update>

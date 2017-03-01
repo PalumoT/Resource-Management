@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Resource Time Off" max_length="40" name="x_44552_bdt_resource_time_off" type="collection">
+        <element label="Day" max_length="40" name="day" type="glide_date"/>
+        <element choice="3" default="1" label="Percentage" max_length="40" name="percentage" type="choice">
+            <choice>
+                <element label="All Day" value="1"/>
+                <element label="Half Day" value="0.5"/>
+            </choice>
+        </element>
+        <element choice="3" default="holidays" label="Reason" max_length="40" name="reason" type="choice">
+            <choice>
+                <element label="Holidays" sequence="1" value="holidays"/>
+                <element label="Sickness" sequence="2" value="sickness"/>
+            </choice>
+        </element>
+        <element label="Resource" max_length="32" name="resource" reference="x_44552_bdt_resource" type="reference"/>
+        <index name="index">
+            <element name="resource"/>
+        </index>
+    </element>
+</database>

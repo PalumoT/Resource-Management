@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Resource Allocation" max_length="40" name="x_44552_bdt_allocation" type="collection">
+        <element label="Days" max_length="40" name="days" type="integer"/>
+        <element default="javascript: current.task.expected_start;" label="From" max_length="40" name="from" type="glide_date"/>
+        <element display="true" label="Resource" max_length="32" name="resource" reference="x_44552_bdt_resource" type="reference"/>
+        <element label="Task" max_length="32" name="task" reference="task" type="reference"/>
+        <element default="javascript: current.task.due_date;" label="To" mandatory="true" max_length="40" name="to" type="glide_date"/>
+        <element label="Total Allocated" max_length="40" name="total_allocated" type="integer"/>
+        <index name="index">
+            <element name="task"/>
+        </index>
+        <index name="index2">
+            <element name="resource"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_documentation element="from" label="From" language="en" table="x_44552_bdt_allocation_month">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>from</element>
+            <help/>
+            <hint/>
+            <label>From</label>
+            <language>en</language>
+            <name>x_44552_bdt_allocation_month</name>
+            <plural>Froms</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-02-28 09:52:51</sys_created_on>
+            <sys_customer_update>true</sys_customer_update>
+            <sys_id>3dd059d80f113200d92e85ace1050e74</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>From</sys_name>
+            <sys_package display_value="Business Demand Tool" source="x_44552_bdt">a85b28f40f497200d92e85ace1050ed0</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Business Demand Tool">a85b28f40f497200d92e85ace1050ed0</sys_scope>
+            <sys_update_name>sys_documentation_x_44552_bdt_allocation_month_from_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-02-28 09:52:51</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

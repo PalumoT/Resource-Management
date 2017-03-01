@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Resource" max_length="40" name="x_44552_bdt_resource" type="collection">
+        <element default="0" label="Allocated" max_length="40" name="allocated" read_only="true" type="integer"/>
+        <element label="Booked From" max_length="40" name="booked_from" type="glide_date"/>
+        <element label="Booked Until" max_length="40" name="booked_until" type="glide_date"/>
+        <element default="0" label="Capacity" max_length="40" name="capacity" read_only="true" type="integer"/>
+        <element default="8" label="FTE" max_length="40" name="fte" type="integer"/>
+        <element default="0" label="Left" max_length="40" name="left" read_only="true" type="integer"/>
+        <element display="true" label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="user"/>
+        </index>
+    </element>
+</database>
